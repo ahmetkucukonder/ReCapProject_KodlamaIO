@@ -8,17 +8,25 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            ProductTest();
+        }
+
+        private static void ProductTest()
+        {
             CarManager carManager = new CarManager(new EfCarDal());
-            Console.WriteLine("--------------------- Get All Cars ---------------------");
-            foreach (var car in carManager.GetAll())
+
+            var result = carManager.GetCarDetails();
+
+            if (result.Success == true)
             {
-                Console.WriteLine(car.CarName);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName + " / " + car.BrandName);
+                }
             }
-            
-            Console.WriteLine("--------------------- Get Car Details ---------------------");
-            foreach (var car in carManager.GetCarDetails())
+            else
             {
-                Console.WriteLine("Car Name:" + car.CarName + ", Brand Name:" + car.BrandName+ ", Description:" + car.Description + " Color:" + car.ColorName);
+                Console.WriteLine(result.Message);
             }
         }
     }
