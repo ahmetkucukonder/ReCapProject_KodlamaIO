@@ -8,10 +8,11 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            ProductTest();
+            UserTest();
+            //CarTest();
         }
 
-        private static void ProductTest()
+        private static void CarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
 
@@ -22,6 +23,24 @@ namespace ConsoleUI
                 foreach (var car in result.Data)
                 {
                     Console.WriteLine(car.CarName + " / " + car.BrandName);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+        }
+        private static void UserTest()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+
+            var result = userManager.GetAll();
+
+            if (result.Success == true)
+            {
+                foreach (var user in result.Data)
+                {
+                    Console.WriteLine(user.FirstName + " " + user.LastName + " / Email: " + user.Email);
                 }
             }
             else

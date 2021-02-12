@@ -49,6 +49,11 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
+        public TEntity GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(TEntity entity)
         {
             using (TContext context = new TContext())
